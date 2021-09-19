@@ -1,16 +1,11 @@
 import "./style.css";
 
-function CardStudents({ studentsList }) {
+function CardStudents({ char: { name, image, house } }) {
   return (
-    <div className={studentsList.house}>
-      <img
-        src={studentsList.image}
-        alt={studentsList.name}
-        width="100px"
-        height="100px"
-      />
-      <p>{studentsList.name}</p>
-      <p className={studentsList.house}>{studentsList.house}</p>
+    <div className={house}>
+      <img src={image} alt={name} width="100px" height="100px" />
+      <p>{name}</p>
+      <p className={house}>{house}</p>
     </div>
   );
 }

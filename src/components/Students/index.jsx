@@ -1,16 +1,14 @@
 import "./style.css";
 import CardStudents from "../CardStudents";
 
-function Students({ filteredStudents }) {
+function Students({ filteredStudents, handleCards }) {
   return (
     <div>
-      {filteredStudents.length !== 0 ? (
-        <>
-          {filteredStudents.map((char, index) => (
-            <CardStudents key={index} char={char} />
-          ))}
-        </>
-      ) : null}
+      {filteredStudents.map((char, index) =>
+        (<CardStudents key={index} char={char} />)(
+          <button onClick={() => handleCards()}>Tentar Novamente</button>
+        )
+      )}
     </div>
   );
 }

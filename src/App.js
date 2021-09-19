@@ -9,30 +9,42 @@ function App() {
   const [filteredStudents, setFilteredStudents] = useState([]);
 
   useEffect(() => {
-    fetch("http://hp-api.herokuapp.com/api/characters/students")
+    fetch("https://hp-api.herokuapp.com/api/characters/students")
       .then((response) => response.json())
-      .then((response) => setStudentsList(response))
+      .then((response) => {
+        setStudentsList(response);
+      })
       .catch((err) => console.log(err));
   }, []);
 
   const randomCard = (card) => {
-    return Math.floor(Math.random() * card);
+    return card[Math.floor(Math.random() * card.length)];
   };
 
-  const cardOne = studentsList[randomCard(studentsList.length)];
-  const filterOne = studentsList.filter((char) => char.house !== cardOne.house);
+  const handleCards = () => {
+    const cardOne = randomCard(studentsList);
+    const cardTwo = studentsList.find((char) => char.house !== cardOne.house);
+    const cardThree = studentsList.find(
+      (char) => char.house !== cardOne.house && char.house !== cardTwo.house
+    );
 
-  const cardTwo = filterOne[randomCard(filterOne.length)];
-  const filterTwo = filterOne.filter((char) => char.house !== cardTwo.house);
-
-  const cardThree = filterTwo[randomCard(filterTwo.length)];
-
-  setFilteredStudents([cardOne, cardTwo, cardThree]);
+    setFilteredStudents([cardOne, cardTwo, cardThree]);
+  };
 
   return (
     <div className="App">
-      <HomePage homePage={homePage} setHomePage={setHomePage} />
-      <Students filteredStudents={filteredStudents} />
+      {homePage ? (
+        <HomePage
+          setHomePage={setHomePage}
+          handleCards={handleCards}
+          filteredStudents={filteredStudents}
+        />
+      ) : (
+        <Students
+          filteredStudents={filteredStudents}
+          handleCards={handleCards}
+        />
+      )}
     </div>
   );
 }
