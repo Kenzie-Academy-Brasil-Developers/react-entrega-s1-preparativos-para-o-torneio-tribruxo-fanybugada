@@ -1,6 +1,6 @@
 import Students from "../Students";
 
-function HomePage({ setHomePage, handleCards, filteredStudents }) {
+function HomePage({ setHomePage, studentsList, homePage }) {
   return (
     <>
       <h1>Torneio Tribruxo</h1>
@@ -8,10 +8,7 @@ function HomePage({ setHomePage, handleCards, filteredStudents }) {
       <button
         onClick={() => {
           setHomePage(false);
-          <Students
-            filteredStudents={filteredStudents}
-            handleCards={handleCards}
-          ></Students>;
+          <Students studentsList={studentsList} homePage={homePage}></Students>;
         }}
       >
         Começar!

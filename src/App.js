@@ -6,7 +6,6 @@ import Students from "./components/Students";
 function App() {
   const [studentsList, setStudentsList] = useState([]);
   const [homePage, setHomePage] = useState(true);
-  const [filteredStudents, setFilteredStudents] = useState([]);
 
   useEffect(() => {
     fetch("https://hp-api.herokuapp.com/api/characters/students")
@@ -15,35 +14,19 @@ function App() {
         setStudentsList(response);
       })
       .catch((err) => console.log(err));
-  }, []);
-
-  const randomCard = (card) => {
-    return card[Math.floor(Math.random() * card.length)];
-  };
-
-  const handleCards = () => {
-    const cardOne = randomCard(studentsList);
-    const cardTwo = studentsList.find((char) => char.house !== cardOne.house);
-    const cardThree = studentsList.find(
-      (char) => char.house !== cardOne.house && char.house !== cardTwo.house
-    );
-
-    setFilteredStudents([cardOne, cardTwo, cardThree]);
-  };
+  }, [studentsList]);
 
   return (
     <div className="App">
-      {homePage ? (
+      {homePage && (
         <HomePage
+          homePage={homePage}
           setHomePage={setHomePage}
-          handleCards={handleCards}
-          filteredStudents={filteredStudents}
+          studentsList={studentsList}
         />
-      ) : (
-        <Students
-          filteredStudents={filteredStudents}
-          handleCards={handleCards}
-        />
+      )}
+      {!homePage && (
+        <Students setHomePage={setHomePage} studentsList={studentsList} />
       )}
     </div>
   );
