@@ -1,0 +1,14 @@
+.homePageContainer {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  top: 40vh;
+  background-color: black;
+  box-shadow: 1px 1px 10px 10px #777777;
+}
+
+.buttonStart {
+  width: 100px;
+  align-self: center;
+  margin-bottom: 30px;
+}

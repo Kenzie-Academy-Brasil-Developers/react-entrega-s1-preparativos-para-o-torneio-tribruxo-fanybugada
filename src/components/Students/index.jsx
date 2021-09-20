@@ -29,7 +29,7 @@ function Students({ studentsList, setHomePage }) {
       setCardsNumber(cardsNumber + 1);
     }
   };
-  console.log(studentsCards);
+
   return (
     <div className="allCardsContainer">
       <div className="studentsContainer">
@@ -38,15 +38,17 @@ function Students({ studentsList, setHomePage }) {
             <img
               src={card.image}
               alt={card.name}
-              width="100px"
-              height="100px"
+              width="150vw"
+              height="200vh"
             />
             <p>{card.name}</p>
             <p className={card.house}>{card.house}</p>
           </div>
         ))}
       </div>
-      <button onClick={() => setHomePage(true)}>Tentar Novamente</button>
+      <button className="buttonTryAgain" onClick={() => setHomePage(true)}>
+        Tentar Novamente
+      </button>
     </div>
   );
 }
